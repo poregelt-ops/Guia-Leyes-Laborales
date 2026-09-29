@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía de Estudio: Leyes Laborales en Guatemala - Colegio Montano</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --azul-principal: #1269A8;
+            --amarillo-brillante: #F7D615;
+            --verde-grisaceo: #54887D;
+            --azul-claro: #88B5C7;
+            --verde-oliva: #A6B046;
+            --blanco-suave: #F2F5E9;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Inter', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e2e8f0;
+            color: #1e293b;
+        }
+
+        .board-frame {
+            border: 10px solid #2d3748;
+            border-radius: 18px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+            background-color: var(--blanco-suave);
+            position: relative;
+        }
+
+        .board-border-accent {
+            border-bottom: 5px solid var(--amarillo-brillante);
+        }
+
+        .bg-azul-principal { background-color: var(--azul-principal); }
+        .text-azul-principal { color: var(--azul-principal); }
+        .bg-amarillo-brillante { background-color: var(--amarillo-brillante); }
+        .text-amarillo-brillante { color: var(--amarillo-brillante); }
+        .bg-verde-grisaceo { background-color: var(--verde-grisaceo); }
+        .text-verde-grisaceo { color: var(--verde-grisaceo); }
+        .bg-azul-claro { background-color: var(--azul-claro); }
+        .border-azul-claro { border-color: var(--azul-claro); }
+        .bg-verde-oliva { background-color: var(--verde-oliva); }
+        .text-verde-oliva { color: var(--verde-oliva); }
+        .bg-blanco-suave { background-color: var(--blanco-suave); }
+
+        .nav-tab {
+            transition: all 0.25s ease-in-out;
+            color: #ffffff;
+            opacity: 0.85;
+        }
+
+        .nav-tab:hover {
+            opacity: 1;
+            transform: translateY(-2px);
+        }
+
+        .nav-tab.active {
+            background-color: var(--blanco-suave);
+            color: var(--azul-principal);
+            font-weight: 700;
+            border-bottom: 4px solid var(--amarillo-brillante);
+            opacity: 1;
+        }
+
+        .badge-level {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.25rem 0.6rem;
+            border-radius: 9999px;
+            text-transform: uppercase;
+        }
+        .badge-basico { background-color: #dbeafe; color: #1e40af; }
+        .badge-intermedio { background-color: #fef3c7; color: #92400e; }
+        .badge-avanzado { background-color: #fce7f3; color: #9d174d; }
+
+        /* Custom scrollbars */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e2e8f0;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--verde-grisaceo);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="p-2 md:p-6 min-h-screen flex flex-col justify-center items-center">
+
+    <!-- MARCO DIGITAL DE PIZARRA -->
+    <div id="whiteboardContainer" class="board-frame w-full max-w-7xl mx-auto flex flex-col overflow-hidden min-h-[85vh]">
+        
+        <!-- HEADER DE LA PIZARRA CON IDENTIDAD COLEGIO MONTANO -->
+        <header class="bg-azul-principal text-white board-border-accent p-4 flex flex-wrap justify-between items-center gap-4">
+            <div class="flex items-center gap-4">
+                <div class="bg-white p-2 rounded-lg shadow-md flex items-center justify-center">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyEop0yf6lZ7Jk9MILZxF1rBj4Oqs5esyhIQ&s" 
+                         alt="Colegio Montano Logo" 
+                         class="h-10 md:h-12 object-contain"
+                         onerror="this.src='https://placehold.co/150x50/1269A8/ffffff?text=Colegio+Montano'">
+                </div>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-extrabold tracking-wide text-white flex items-center gap-2">
+                        <i class="fa-solid font-sharp fa-chalkboard-user text-amarillo-brillante"></i> 
+                        Pizarra Digital Interactiva
+                    </h1>
+                    <p class="text-xs md:text-sm text-blue-100 font-medium">
+                        Leyes Laborales en Guatemala • <span class="text-amarillo-brillante font-bold">4to. Bachillerato</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Botón de Pantalla Completa (Fullscreen API) -->
+            <button onclick="toggleFullscreen()" 
+                    class="bg-amarillo-brillante hover:bg-yellow-400 text-slate-900 font-bold px-4 py-2 rounded-lg shadow transition flex items-center gap-2 text-xs md:text-sm cursor-pointer">
+                <i id="fullscreenIcon" class="fa-solid fa-expand"></i>
+                <span id="fullscreenText">Pantalla completa</span>
+            </button>
+        </header>
+
+        <!-- NAVEGACIÓN HORIZONTAL POR PESTAÑAS -->
+        <nav class="bg-azul-principal border-b border-blue-800 flex overflow-x-auto no-scrollbar px-2 pt-2 gap-1 text-sm">
+            <button onclick="switchTab('teoria')" id="tab-teoria" class="nav-tab active px-5 py-3 rounded-t-lg flex items-center gap-2 whitespace-nowrap">
+                <i class="fa-solid fa-book-open"></i> 1. Explicación Teórica
+            </button>
+            <button onclick="switchTab('ejemplos')" id="tab-ejemplos" class="nav-tab px-5 py-3 rounded-t-lg flex items-center gap-2 whitespace-nowrap">
+                <i class="fa-solid fa-lightbulb"></i> 2. Ejemplos Resueltos
+            </button>
+            <button onclick="switchTab('ejercicios')" id="tab-ejercicios" class="nav-tab px-5 py-3 rounded-t-lg flex items-center gap-2 whitespace-nowrap">
+                <i class="fa-solid fa-pen-to-square"></i> 3. Ejercicios Prácticos
+            </button>
+            <button onclick="switchTab('reflexion')" id="tab-reflexion" class="nav-tab px-5 py-3 rounded-t-lg flex items-center gap-2 whitespace-nowrap">
+                <i class="fa-solid fa-brain"></i> 4. Reflexión Crítica
+            </button>
+            <button onclick="switchTab('evaluacion')" id="tab-evaluacion" class="nav-tab px-5 py-3 rounded-t-lg flex items-center gap-2 whitespace-nowrap">
+                <i class="fa-solid fa-clipboard-check"></i> 5. Evaluación Formativa
+            </button>
+        </nav>
+
+        <!-- LIENZO PRINCIPAL DE CONTENIDO -->
+        <main class="flex-1 p-4 md:p-8 overflow-y-auto max-h-[70vh]">
+            
+            <!-- SECCIÓN 1: TEORÍA -->
+            <section id="sec-teoria" class="tab-content space-y-6">
+                <div class="border-l-4 border-azul-principal pl-4 bg-white p-4 rounded-r-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-azul-principal flex items-center gap-2">
+                        <i class="fa-solid fa-scale-balanced text-verde-grisaceo"></i>
+                        Marco Legal del Trabajo en Guatemala
+                    </h2>
+                    <p class="text-slate-600 mt-1">
+                        El Derecho Laboral guatemalteco se fundamenta principalmente en la <strong>Constitución Política de la República de Guatemala (Artículos 101 al 106)</strong> y el <strong>Código de Trabajo (Decreto Núm. 1441 del Congreso de la República)</strong>. Sus principios buscan tutelar y proteger al trabajador como la parte económicamente más débil de la relación laboral.
+                    </p>
+                </div>
+
+                <!-- Tarjetas conceptuales -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    
+                    <!-- Tarjeta 1: Jornadas de Trabajo -->
+                    <div class="bg-white rounded-xl shadow-md border border-slate-200 overflow-hidden hover:shadow-lg transition">
+                        <div class="bg-azul-principal text-white px-4 py-3 font-bold flex justify-between items-center">
+                            <span><i class="fa-regular fa-clock mr-2"></i>Jornadas de Trabajo</span>
+                            <span class="text-xs bg-amarillo-brillante text-slate-900 px-2 py-0.5 rounded font-extrabold">Art. 116-125</span>
+                        </div>
+                        <div class="p-4 space-y-3 text-sm text-slate-700">
+                            <div class="p-2 bg-blue-50 rounded border-l-2 border-azul-principal">
+                                <strong class="text-azul-principal">Diurna:</strong> Entre 6:00 y 18:00 hrs. Máximo 8h/día (44 hrs semanales pagadas como 48 hrs).
+                            </div>
+                            <div class="p-2 bg-slate-50 rounded border-l-2 border-slate-600">
+                                <strong class="text-slate-800">Nocturna:</strong> Entre 18:00 y 6:00 hrs del día siguiente. Máximo 6h/día (36 hrs semanales).
+                            </div>
+                            <div class="p-2 bg-teal-50 rounded border-l-2 border-verde-grisaceo">
+                                <strong class="text-verde-grisaceo">Mixta:</strong> Abarca parte del día y noche (siempre que la nocturna sea &lt; 4 hrs). Máximo 7h/día (42 hrs semanales).
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta 2: Prestaciones Irrenunciables -->
+                    <div class="bg-white rounded-xl shadow-md border border-slate-200 overflow-hidden hover:shadow-lg transition">
+                        <div class="bg-verde-grisaceo text-white px-4 py-3 font-bold flex justify-between items-center">
+                            <span><i class="fa-solid fa-hand-holding-dollar mr-2"></i>Prestaciones de Ley</span>
+                            <span class="text-xs bg-amarillo-brillante text-slate-900 px-2 py-0.5 rounded font-extrabold">Irrenunciables</span>
+                        </div>
+                        <div class="p-4 space-y-2 text-sm text-slate-700">
+                            <p><strong>• Aguinaldo (Dec. 76-78):</strong> 100% de un salario ordinario mensual por un año completo (período: 1 dic al 30 nov).</p>
+                            <p><strong>• Bono 14 (Dec. 42-92):</strong> 100% de un salario ordinario mensual por un año completo (período: 1 jul al 30 jun).</p>
+                            <p><strong>• Vacaciones:</strong> 15 días hábiles pagados después de cada año de trabajo continuo (mínimo 150 días laborados).</p>
+                            <p><strong>• Bonificación Incentivo (Dec. 37-2001):</strong> Mínimo Q250.00 mensuales fijos para todo trabajador.</p>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta 3: Deducciones e Indemnización -->
+                    <div class="bg-white rounded-xl shadow-md border border-slate-200 overflow-hidden hover:shadow-lg transition">
+                        <div class="bg-azul-claro text-slate-900 px-4 py-3 font-bold flex justify-between items-center">
+                            <span><i class="fa-solid fa-calculator mr-2"></i>Deducciones e Indemnización</span>
+                            <span class="text-xs bg-azul-principal text-white px-2 py-0.5 rounded font-extrabold">Seguridad Social</span>
+                        </div>
+                        <div class="p-4 space-y-3 text-sm text-slate-700">
+                            <p><strong>Deducción IGSS Trabajador:</strong> 4.83% sobre el total de sueldo ordinario y extraordinario (excluye bonificación incentivo Q250).</p>
+                            <p><strong>Deducción IGSS Patrono:</strong> 10.67% a cargo de la empresa.</p>
+                            <div class="p-2 bg-yellow-50 rounded border-l-2 border-amarillo-brillante text-xs">
+                                <strong>Indemnización por Despido Injustificado (Art. 82):</strong> Equivalente a 1 mes de salario por cada año laborado (incluyendo parte proporcional de Aguinaldo y Bono 14 en la base).
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Principios fundamentales -->
+                <div class="bg-verde-oliva text-white p-5 rounded-xl shadow-md flex flex-col md:flex-row items-center gap-4">
+                    <div class="text-4xl text-amarillo-brillante">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg text-white">Principio Guía: Tutelaridad e Irrenunciabilidad de Derechos (Art. 106 CPRG)</h3>
+                        <p class="text-sm opacity-90">
+                            Los derechos laborales contemplados en la legislación guatemalteca constituyen un <strong>mínimo de garantías sociales irrenunciables</strong> para el trabajador. Cualquier acuerdo firmado entre patrono y empleado que implique renuncia, disminución o tergiversación de estos derechos es <strong>nulo de pleno derecho (nulo totalmente)</strong>.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 2: EJEMPLOS RESUELTOS -->
+            <section id="sec-ejemplos" class="tab-content hidden space-y-6">
+                <div class="flex justify-between items-center border-b pb-3">
+                    <h2 class="text-2xl font-bold text-azul-principal">
+                        <i class="fa-solid fa-lightbulb text-amarillo-brillante mr-2"></i>
+                        Ejemplos Resueltos Paso a Paso
+                    </h2>
+                    <span class="text-xs bg-slate-200 text-slate-700 px-3 py-1 rounded-full font-semibold">15 Casos Prácticos</span>
+                </div>
+
+                <!-- NIVEL BÁSICO (5 Ejemplos) -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-bold text-blue-900 bg-blue-100 p-2 rounded-md flex items-center justify-between">
+                        <span><i class="fa-solid fa-seedling text-blue-600 mr-2"></i>Nivel Básico (Ejemplos 1 a 5)</span>
+                        <span class="badge-level badge-basico">Básico</span>
+                    </h3>
+
+                    <!-- Ejemplo 1 -->
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-2">
+                        <div class="font-bold text-slate-800">Ejemplo 1: Cálculo del descuento laboral del IGSS</div>
+                        <p class="text-sm text-slate-600">Un trabajador devenga un salario ordinario mensual de <strong>Q3,200.00</strong>. ¿Cuánto se le debe descontar mensualmente por concepto de cuota laboral del IGSS?</p>
+                        <div class="bg-blue-50 p-3 rounded-lg text-sm border-l-4 border-azul-principal font-mono">
+                            <strong>Resolución:</strong><br>
+                            • Porcentaje de deducción laboral IGSS = 4.83%<br>
+                            • Descuento = Salario Ordinario × 0.0483<br>
+                            • Descuento = Q3,200.00 × 0.0483 = <strong>Q154.56</strong><br>
+                            <span class="text-xs text-slate-500 font-sans">Respuesta: El patrono retiene Q154.56 de IGSS al trabajador.</span>
+                        </div>
+                    </div>
+
+                    <!-- Ejemplo 2 -->
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-2">
+                        <div class="font-bold text-slate-800">Ejemplo 2: Identificación de horas máximas en Jornada Diurna</div>
+                        <p class="text-sm text-slate-600">Un operario trabaja en horario de 8:00 a 17:00 con 1 hora de almuerzo de lunes a viernes. ¿Cumple con el límite de horas ordinarias del Código de Trabajo?</p>
+                        <div class="bg-blue-50 p-3 rounded-lg text-sm border-l-4 border-azul-principal font-mono">
+                            <strong>Resolución:</strong><br>
+                            • Horas diarias = 9 hrs totales - 1 hr almuerzo = 8 horas diarias.<br>
+                            • Total semanal = 8 horas × 5 días = 40 horas semanales.<br>
+                            • El máximo legal diurno es 8h diarias y 44h semanales.<br>
+                            <span class="text-xs text-slate-500 font-sans">Respuesta: Sí cumple. Se encuentra dentro del margen ordinario legal.</span>
+                        </div>
+                    </div>
+
+                    <!-- Ejemplo 3 -->
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-2">
+                        <div class="font-bold text-slate-800">Ejemplo 3: Aplicación de la Bonificación Incentivo</div>
+                        <p class="text-sm text-slate-600">Si un empleado gana Q3,500.00 de salario base, ¿cuál es su ingreso bruto mensual sumando la Bonificación Incentivo legal de Guatemala?</p>
+                        <div class="bg-blue-50 p-3 rounded-lg text-sm border-l-4 border-azul-principal font-mono">
+                            <strong>Resolución:</strong><br>
+                            • Decreto 37-2001 establece Bonificación Incentivo mínima = Q250.00.<br>
+                            • Ingreso Bruto = Q3,500.00 + Q250.00 = <strong>Q3,750.00</strong><br>
+                            <span class="text-xs text-slate-500 font-sans">Nota: La bonificación de Q250 no está sujeta al descuento del IGSS.</span>
+                        </div>
+                    </div>
+
+                    <!-- Ejemplo 4 -->
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-2">
+                        <div class="font-bold text-slate-800">Ejemplo 4: Identificación de período de Aguinaldo</div>
+                        <p class="text-sm text-slate-600">¿Cuál es el período completo de cómputo para el pago del Aguinaldo en Guatemala?</p>
+                        <div class="bg-blue-50 p-3 rounded-lg text-sm border-l-4 border-azul-principal font-mono">
+                            <strong>Resolución:</strong><br>
+                            • Según el Decreto 76-78, el año computable abarca del <strong>1 de diciembre del año anterior al 30 de noviembre del año en curso</strong> (12 meses).
+                        </div>
+                    </div>
+
+                    <!-- Ejemplo 5 -->
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-2">
+                        <div class="font-bold text-slate-800">Ejemplo 5: Días de vacaciones por año laborado</div>
+                        <p class="text-sm text-slate-600">Un trabajador cumplió 1 año continuo en una empresa trabajando más de 150 días. ¿A cuántos días de vacaciones remuneradas tiene derecho?</p>
+                        <div class="bg-blue-50 p-3 rounded-lg text-sm border-l-4 border-azul-principal font-mono">
+                            <strong>Resolución:</strong><br>
+                            • Código de Trabajo, Art. 130: <strong>15 días hábiles remunerados</strong>.<br>
+                            <span class="text-xs text-slate-500 font-sans">Respuesta: Corresponden 15 días hábiles de descanso pagado.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NIVEL INTERMEDIO (5 Ejemplos) -->
+                <div class="space-y-4 pt-4">
+                    <h3 class="text-lg font-bold text-amber-900 bg-amber-100 p-2 rounded-md flex items-center justify-between">
+                        <span><i class="fa-solid fa-chart-simple text-amber-600 mr-2"></i>Nivel Intermedio (Ejemplos 6 a 10)</span>
+                        <span class="badge-level badge-intermedio">Intermedio</span>
+                    </h3>
+
+                    <!-- Ejemplo 6 -->
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-2">
+                        <div class="font-bold text-slate-800">Ejemplo 6: Cálculo de horas extraordinarias (150%)</div>
+                        <p class="text-sm text-slate-600">Un empleado con salario mensual ordinario de Q3,600.00 en jornada diurna (200 horas/mes promedio) realiza 10 horas extras en el mes. ¿Cuánto debe cobrarse por horas extraordinarias?</p>
+                        <div class="bg-amber-50 p-3 rounded-lg text-sm border-l-4 border-amarillo-brillante font-mono">
+                            <strong>Resolución:</strong><br>
+                            1. Valor hora ordinaria = Q3,600.00 / 200 hrs = Q18.00 por hora.<br>
+                            2. Valor hora extra (+50% recargo según Art. 121) = Q18.00 × 1.5 = Q27.00 por hora extra.<br>
+                            3. Pago por 10 horas extras = 10 × Q27.00 = <strong>Q270.00</strong>.
+                        </div>
+                    </div>
+
+                    <!-- Ejemplo 7 -->
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-2">
+                        <div class="font-bold text-slate-800">Ejemplo 7: Proporcional de Bono 14 por tiempo parcial</div>
+                        <p class="text-sm text-slate-600">Un trabajador ingresó a laborar el 1 de enero y la empresa pagará el Bono 14 el 15 de julio. Su sueldo base es de Q4,000.00. ¿Cuánto le corresponde proporcionalmente del 1 de enero al 30 de junio (181 días de un año de 365)?</p>
+                        <div class="bg-amber-50 p-3 rounded-lg text-sm border-l-4 border-amarillo-brillante font-mono">
+                            <strong>Resolución:</strong><br>
+                            • Período de Bono 14 = 1 julio al 30 junio (365 días).<br>
+                            • Días laborados (Ene-Jun) = 181 días.<br>
+                            • Bono Proporcional = (Sueldo Base / 365) × Días Laborados<br>
+                            • Bono Proporcional = (Q4,000 / 365) × 181 = Q10.9589 × 181 = <strong>Q1,983.56</strong>
+                        </div>
+                    </div>
+
+                    <!-- Ejemplo 8 -->
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-2">
+                        <div class="font-bold text-slate-800">Ejemplo 8: Límite de horas en Jornada Mixta Nocturna</div>
+                        <p class="text-sm text-slate-600">Si un trabajador labora de 15:00 a 22:00 horas, ¿qué jornada constituye y cuál es el límite legal diario de trabajo?</p>
+                        <div class="bg-amber-50 p-3 rounded-lg text-sm border-l-4 border-amarillo-brillante font-mono">
+                            <strong>Resolución:</strong><br>
+                            • Horario nocturno inicia a las 18:00 hrs. De 18:00 a 22:00 hay 4 horas nocturnas.<br>
+                            • <em>Regla (Art. 117):</em> Si se laboran 4 o más horas en período nocturno, la jornada se transforma automáticamente en <strong>NOCTURNA</strong> (Límite: 6 hrs diarias).<br>
+                            • Al laborar 7 horas en este horario, la empresa incurre en exceso de horas y debe pagar 1 hora extra ordinaria por día.
+                        </div>
+                    </div>
+
+                    <!-- Ejemplo 9 -->
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-2">
+                        <div class="font-bold text-slate-800">Ejemplo 9: IGSS total considerando Salario Ordinario + Extraordinario</div>
+                        <p class="text-sm text-slate-600">Un empleado gana Q4,000.00 ordinario, Q500.00 de horas extras y Q250.00 de bonificación incentivo. ¿Cuál es el descuento del IGSS?</p>
+                        <div class="bg-amber-50 p-3 rounded-lg text-sm border-l-4 border-amarillo-brillante font-mono">
+                            <strong>Resolución:</strong><br>
+                            • Base Afecta IGSS = Salario Ordinario + Horas Extras (Excluye Bonificación Incentivo).<br>
+                            • Base Afecta = Q4,000.00 + Q500.00 = Q4,500.00.<br>
+                            • Descuento IGSS (4.83%) = Q4,500.00 × 0.0483 = <strong>Q217.35</strong>.
+                        </div>
+                    </div>
+
+                    <!-- Ejemplo 10 -->
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-2">
+                        <div class="font-bold text-slate-800">Ejemplo 10: Período de Preaviso para renuncia de trabajador</div>
+                        <p class="text-sm text-slate-600">Un trabajador lleva 3 años en una empresa y desea renunciar. ¿Con cuánta anticipación debe presentar su preaviso según el Código de Trabajo?</p>
+                        <div class="bg-amber-50 p-3 rounded-lg text-sm border-l-4 border-amarillo-brillante font-mono">
+                            <strong>Resolución:</strong><br>
+                            • Código de Trabajo Art. 83:<br>
+                            - Más de 1 año y menos de 5 años de servicios continuos = <strong>1 mes de anticipación</strong>.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NIVEL AVANZADO (5 Ejemplos) -->
+                <div class="space-y-4 pt-4">
+                    <h3 class="text-lg font-bold text-pink-900 bg-pink-100 p-2 rounded-md flex items-center justify-between">
+                        <span><i class="fa-solid fa-trophy text-pink-600 mr-2"></i>Nivel Avanzado (Ejemplos 11 a 15)</span>
+                        <span class="badge-level badge-avanzado">Avanzado</span>
+                    </h3>
+
+                    <!-- Ejemplo 11 -->
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-2">
+                        <div class="font-bold text-slate-800">Ejemplo 11: Base de cálculo para la Indemnización (Factor 14/12)</div>
+                        <p class="text-sm text-slate-600">Un colaborador con salario promedio de Q6,000.00 mensual es despedido injustificadamente. ¿Cuál es el sueldo promedio mensual integrado para calcular su indemnización incorporando la parte proporcional de Aguinaldo y Bono 14?</p>
+                        <div class="bg-pink-50 p-3 rounded-lg text-sm border-l-4 border-pink-500 font-mono">
+                            <strong>Resolución:</strong><br>
+                            • En Guatemala, la indemnización integra las dos prestaciones anuales (Aguinaldo + Bono 14 = 2 sueldos extras al año).<br>
+                            • Fórmula de Sueldo Promedio Integrado = Salario Promedio × (14 / 12) [o bien Salario + (Salario/6)]<br>
+                            • Cálculo = Q6,000 + (Q6,000 / 6) = Q6,000 + Q1,000 = <strong>Q7,000.00</strong>.<br>
+                            <span class="text-xs text-slate-600 font-sans">Esta cifra de Q7,000.00 es la base para multiplicar por cada año laborado.</span>
+                        </div>
+                    </div>
+
+                    <!-- Ejemplo 12 -->
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-2">
+                        <div class="font-bold text-slate-800">Ejemplo 12: Indemnización por tiempo exacto (Años y Días)</div>
+                        <p class="text-sm text-slate-600">El trabajador del Ejemplo 11 laboró exactamente 2 años y 182 días. Con una base integrada de Q7,000.00, ¿cuánto le corresponde de indemnización pura?</p>
+                        <div class="bg-pink-50 p-3 rounded-lg text-sm border-l-4 border-pink-500 font-mono">
+                            <strong>Resolución:</strong><br>
+                            1. Indemnización por 2 años completos = 2 × Q7,000.00 = Q14,000.00.<br>
+                            2. Indemnización por 182 días proporcionales = (Q7,000.00 / 365) × 182 = Q19.178 × 182 = Q3,490.41.<br>
+                            3. Total Indemnización Pura = Q14,000.00 + Q3,490.41 = <strong>Q17,490.41</strong>.
+                        </div>
+                    </div>
+
+                    <!-- Ejemplo 13 -->
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-2">
+                        <div class="font-bold text-slate-800">Ejemplo 13: Recargo de hora extraordinaria en Jornada Nocturna</div>
+                        <p class="text-sm text-slate-600">Un vigilante en jornada nocturna ordinaria (150 horas/mes) devenga Q3,300.00. Realiza 8 horas extras nocturnas. ¿Cuál es el monto total a pagar por estas horas extras?</p>
+                        <div class="bg-pink-50 p-3 rounded-lg text-sm border-l-4 border-pink-500 font-mono">
+                            <strong>Resolución:</strong><br>
+                            1. Valor hora ordinaria nocturna = Q3,300.00 / 150 hrs = Q22.00 por hora.<br>
+                            2. Valor hora extra (+50%) = Q22.00 × 1.5 = Q33.00 por hora.<br>
+                            3. Total 8 horas extras nocturnas = 8 × Q33.00 = <strong>Q264.00</strong>.
+                        </div>
+                    </div>
+
+                    <!-- Ejemplo 14 -->
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-2">
+                        <div class="font-bold text-slate-800">Ejemplo 14: Liquidación por renuncia voluntaria</div>
+                        <p class="text-sm text-slate-600">Si un trabajador renuncia voluntariamente tras 4 años de laborar, ¿a qué prestaciones tiene derecho obligatoriamente?</p>
+                        <div class="bg-pink-50 p-3 rounded-lg text-sm border-l-4 border-pink-500 font-mono">
+                            <strong>Resolución:</strong><br>
+                            En renuncia voluntaria (salvo pacto colectivo superior) <strong>no aplica indemnización</strong>, pero recibe obligatoriamente sus irrenunciables:<br>
+                            1. Aguinaldo proporcional a la fecha.<br>
+                            2. Bono 14 proporcional a la fecha.<br>
+                            3. Vacaciones no disfrutadas (pendientes o proporcionales).<br>
+                            4. Salario de días trabajados pendientes de pago.
+                        </div>
+                    </div>
+
+                    <!-- Ejemplo 15 -->
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-2">
+                        <div class="font-bold text-slate-800">Ejemplo 15: Proporción de Vacaciones no disfrutadas</div>
+                        <p class="text-sm text-slate-600">Un empleado es retirado tras trabajar 8 meses de su segundo año de servicios sin haber tomado sus vacaciones. Su sueldo ordinario mensual es Q4,500.00. ¿Cuánto se le paga por vacaciones no disfrutadas?</p>
+                        <div class="bg-pink-50 p-3 rounded-lg text-sm border-l-4 border-pink-500 font-mono">
+                            <strong>Resolución:</strong><br>
+                            • Por 12 meses corresponden 15 días hábiles de salario.<br>
+                            • Días de salario al día = Q4,500.00 / 30 días = Q150.00 diarios.<br>
+                            • Vacaciones por 12 meses = 15 días × Q150.00 = Q2,250.00.<br>
+                            • Vacaciones proporcionales por 8 meses = (Q2,250.00 / 12) × 8 = <strong>Q1,500.00</strong>.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 3: EJERCICIOS PRÁCTICOS -->
+            <section id="sec-ejercicios" class="tab-content hidden space-y-6">
+                <div class="flex justify-between items-center border-b pb-3">
+                    <h2 class="text-2xl font-bold text-azul-principal">
+                        <i class="fa-solid fa-pen-to-square text-verde-grisaceo mr-2"></i>
+                        Ejercicios Prácticos de Aplicación
+                    </h2>
+                    <span class="text-xs bg-verde-oliva text-white px-3 py-1 rounded-full font-semibold">Resuelve y Verifica</span>
+                </div>
+
+                <!-- BÁSICO (5 Ejercicios) -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-bold text-blue-900 bg-blue-100 p-2 rounded-md">Ejercicios de Nivel Básico</h3>
+                    
+                    <!-- Ex 1 -->
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-3">
+                        <div class="font-semibold text-slate-800">1. Laura percibe un salario base de Q4,800.00 mensualmente. Calcula el valor de su retención para el IGSS laboral.</div>
+                        <div class="space-y-2">
+                            <label class="block text-xs font-bold text-slate-700 flex items-center gap-1">
+                                <i class="fa-solid fa-pen-to-square text-azul-principal"></i> Tu respuesta y procedimiento:
+                            </label>
+                            <textarea id="input-ex1" rows="2" placeholder="Escribe aquí tu cálculo antes de ver la solución..." class="w-full p-2.5 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none bg-slate-50 text-slate-800" oninput="enableSolutionBtn('ex1')"></textarea>
+                            <div id="hint-ex1" class="hidden text-xs text-amber-700 bg-amber-50 p-2 rounded border border-amber-200 flex items-center gap-1">
+                                <i class="fa-solid fa-circle-info"></i> Escribe tu respuesta en el cuadro superior para habilitar la solución.
+                            </div>
+                            <button onclick="toggleSolution('sol-ex1')" class="bg-azul-principal hover:bg-blue-800 text-white text-xs px-3 py-1.5 rounded-lg transition flex items-center gap-1 font-semibold">
+                                <i class="fa-solid fa-eye"></i> <span id="btn-sol-ex1">Mostrar solución</span>
+                            </button>
+                        </div>
+                        <div id="sol-ex1" class="hidden bg-blue-50 p-3 rounded-lg text-sm border-l-4 border-azul-principal space-y-1">
+                            <strong class="text-azul-principal">Solución paso a paso:</strong>
+                            <p>1. Sueldo base: Q4,800.00</p>
+                            <p>2. Porcentaje IGSS Laboral: 4.83%</p>
+                            <p>3. Operación: Q4,800.00 × 0.0483 = <strong>Q231.84</strong></p>
+                        </div>
+                    </div>
+
+                    <!-- Ex 2 -->
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-3">
+                        <div class="font-semibold text-slate-800">2. Mario es contratado en jornada nocturna de 19:00 a 01:00 horas del día siguiente. ¿Cuántas horas semanales le corresponde trabajar legalmente?</div>
+                        <div class="space-y-2">
+                            <label class="block text-xs font-bold text-slate-700 flex items-center gap-1">
+                                <i class="fa-solid fa-pen-to-square text-azul-principal"></i> Tu respuesta y procedimiento:
+                            </label>
+                            <textarea id="input-ex2" rows="2" placeholder="Escribe aquí tu análisis..." class="w-full p-2.5 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none bg-slate-50 text-slate-800" oninput="enableSolutionBtn('ex2')"></textarea>
+                            <div id="hint-ex2" class="hidden text-xs text-amber-700 bg-amber-50 p-2 rounded border border-amber-200 flex items-center gap-1">
+                                <i class="fa-solid fa-circle-info"></i> Escribe tu respuesta en el cuadro superior para habilitar la solución.
+                            </div>
+                            <button onclick="toggleSolution('sol-ex2')" class="bg-azul-principal hover:bg-blue-800 text-white text-xs px-3 py-1.5 rounded-lg transition flex items-center gap-1 font-semibold">
+                                <i class="fa-solid fa-eye"></i> <span id="btn-sol-ex2">Mostrar solución</span>
+                            </button>
+                        </div>
+                        <div id="sol-ex2" class="hidden bg-blue-50 p-3 rounded-lg text-sm border-l-4 border-azul-principal space-y-1">
+                            <strong class="text-azul-principal">Solución paso a paso:</strong>
+                            <p>1. Horario de 19:00 a 01:00 = 6 horas diarias (Jornada Nocturna pura).</p>
+                            <p>2. Límite máximo semanal en Jornada Nocturna = <strong>36 horas semanales</strong> (Art. 116 Código de Trabajo).</p>
+                        </div>
+                    </div>
+
+                    <!-- Ex 3 -->
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-3">
+                        <div class="font-semibold text-slate-800">3. ¿Cuál es el monto mínimo legal de la Bonificación Incentivo que debe recibir un trabajador en Guatemala según el Decreto 37-2001?</div>
+                        <div class="space-y-2">
+                            <label class="block text-xs font-bold text-slate-700 flex items-center gap-1">
+                                <i class="fa-solid fa-pen-to-square text-azul-principal"></i> Tu respuesta:
+                            </label>
+                            <textarea id="input-ex3" rows="2" placeholder="Escribe tu respuesta aquí..." class="w-full p-2.5 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none bg-slate-50 text-slate-800" oninput="enableSolutionBtn('ex3')"></textarea>
+                            <div id="hint-ex3" class="hidden text-xs text-amber-700 bg-amber-50 p-2 rounded border border-amber-200 flex items-center gap-1">
+                                <i class="fa-solid fa-circle-info"></i> Escribe tu respuesta en el cuadro superior para habilitar la solución.
+                            </div>
+                            <button onclick="toggleSolution('sol-ex3')" class="bg-azul-principal hover:bg-blue-800 text-white text-xs px-3 py-1.5 rounded-lg transition flex items-center gap-1 font-semibold">
+                                <i class="fa-solid fa-eye"></i> <span id="btn-sol-ex3">Mostrar solución</span>
+                            </button>
+                        </div>
+                        <div id="sol-ex3" class="hidden bg-blue-50 p-3 rounded-lg text-sm border-l-4 border-azul-principal space-y-1">
+                            <strong class="text-azul-principal">Solución paso a paso:</strong>
+                            <p>1. Norma legal: Decreto 37-2001 del Congreso de la República.</p>
+                            <p>2. Monto obligatorio mínimo = <strong>Q250.00 mensuales</strong>.</p>
+                        </div>
+                    </div>
+
+                    <!-- Ex 4 -->
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-3">
+                        <div class="font-semibold text-slate-800">4. Si un empleado gana Q3,000.00 de sueldo base y no acumuló faltas en todo el año, ¿cuánto debe recibir en concepto de Aguinaldo completo en diciembre?</div>
+                        <div class="space-y-2">
+                            <label class="block text-xs font-bold text-slate-700 flex items-center gap-1">
+                                <i class="fa-solid fa-pen-to-square text-azul-principal"></i> Tu respuesta y procedimiento:
+                            </label>
+                            <textarea id="input-ex4" rows="2" placeholder="Escribe tu respuesta aquí..." class="w-full p-2.5 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none bg-slate-50 text-slate-800" oninput="enableSolutionBtn('ex4')"></textarea>
+                            <div id="hint-ex4" class="hidden text-xs text-amber-700 bg-amber-50 p-2 rounded border border-amber-200 flex items-center gap-1">
+                                <i class="fa-solid fa-circle-info"></i> Escribe tu respuesta en el cuadro superior para habilitar la solución.
+                            </div>
+                            <button onclick="toggleSolution('sol-ex4')" class="bg-azul-principal hover:bg-blue-800 text-white text-xs px-3 py-1.5 rounded-lg transition flex items-center gap-1 font-semibold">
+                                <i class="fa-solid fa-eye"></i> <span id="btn-sol-ex4">Mostrar solución</span>
+                            </button>
+                        </div>
+                        <div id="sol-ex4" class="hidden bg-blue-50 p-3 rounded-lg text-sm border-l-4 border-azul-principal space-y-1">
+                            <strong class="text-azul-principal">Solución paso a paso:</strong>
+                            <p>1. El Aguinaldo completo equivale al 100% de un sueldo ordinario mensual.</p>
+                            <p>2. Total de Aguinaldo = <strong>Q3,000.00</strong> (Pagadero 50% en diciembre y 50% en enero, o 100% en diciembre).</p>
+                        </div>
+                    </div>
+
+                    <!-- Ex 5 -->
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-3">
+                        <div class="font-semibold text-slate-800">5. ¿Cuántos días de trabajo mínimo continuo requiere la ley para que un colaborador devengue el derecho a sus vacaciones anuales?</div>
+                        <div class="space-y-2">
+                            <label class="block text-xs font-bold text-slate-700 flex items-center gap-1">
+                                <i class="fa-solid fa-pen-to-square text-azul-principal"></i> Tu respuesta:
+                            </label>
+                            <textarea id="input-ex5" rows="2" placeholder="Escribe tu respuesta aquí..." class="w-full p-2.5 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none bg-slate-50 text-slate-800" oninput="enableSolutionBtn('ex5')"></textarea>
+                            <div id="hint-ex5" class="hidden text-xs text-amber-700 bg-amber-50 p-2 rounded border border-amber-200 flex items-center gap-1">
+                                <i class="fa-solid fa-circle-info"></i> Escribe tu respuesta en el cuadro superior para habilitar la solución.
+                            </div>
+                            <button onclick="toggleSolution('sol-ex5')" class="bg-azul-principal hover:bg-blue-800 text-white text-xs px-3 py-1.5 rounded-lg transition flex items-center gap-1 font-semibold">
+                                <i class="fa-solid fa-eye"></i> <span id="btn-sol-ex5">Mostrar solución</span>
+                            </button>
+                        </div>
+                        <div id="sol-ex5" class="hidden bg-blue-50 p-3 rounded-lg text-sm border-l-4 border-azul-principal space-y-1">
+                            <strong class="text-azul-principal">Solución paso a paso:</strong>
+                            <p>1. Según el Art. 131 del Código de Trabajo de Guatemala, el mínimo es de <strong>150 días laborados</strong> dentro del año continuo.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- INTERMEDIO (5 Ejercicios) -->
+                <div class="space-y-4 pt-4">
+                    <h3 class="text-lg font-bold text-amber-900 bg-amber-100 p-2 rounded-md">Ejercicios de Nivel Intermedio</h3>
+
+                    <!-- Ex 6 -->
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-3">
+                        <div class="font-semibold text-slate-800">6. Sofía trabaja en jornada diurna con sueldo de Q4,000.00 mensual (200 horas/mes). En el mes laboró 12 horas extraordinarias. Calcula su salario líquido mensual sumando la Bonificación Incentivo (Q250.00) y restando el IGSS.</div>
+                        <div class="space-y-2">
+                            <label class="block text-xs font-bold text-slate-700 flex items-center gap-1">
+                                <i class="fa-solid fa-pen-to-square text-verde-grisaceo"></i> Tu respuesta y procedimiento:
+                            </label>
+                            <textarea id="input-ex6" rows="2" placeholder="Escribe tu procedimiento y resultado..." class="w-full p-2.5 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none bg-slate-50 text-slate-800" oninput="enableSolutionBtn('ex6')"></textarea>
+                            <div id="hint-ex6" class="hidden text-xs text-amber-700 bg-amber-50 p-2 rounded border border-amber-200 flex items-center gap-1">
+                                <i class="fa-solid fa-circle-info"></i> Escribe tu respuesta en el cuadro superior para habilitar la solución.
+                            </div>
+                            <button onclick="toggleSolution('sol-ex6')" class="bg-verde-grisaceo hover:bg-teal-700 text-white text-xs px-3 py-1.5 rounded-lg transition flex items-center gap-1 font-semibold">
+                                <i class="fa-solid fa-eye"></i> <span id="btn-sol-ex6">Mostrar solución</span>
+                            </button>
+                        </div>
+                        <div id="sol-ex6" class="hidden bg-amber-50 p-3 rounded-lg text-sm border-l-4 border-amarillo-brillante space-y-1">
+                            <strong class="text-amber-900">Solución paso a paso:</strong>
+                            <p>1. Valor hora ordinaria = Q4,000 / 200 = Q20.00.</p>
+                            <p>2. Valor hora extra (+50%) = Q20.00 × 1.5 = Q30.00.</p>
+                            <p>3. Total Horas Extras = 12 × Q30.00 = Q360.00.</p>
+                            <p>4. Base Afecta IGSS = Q4,000.00 + Q360.00 = Q4,360.00.</p>
+                            <p>5. Descuento IGSS (4.83%) = Q4,360.00 × 0.0483 = Q210.59.</p>
+                            <p>6. Salario Líquido = (Sueldo Base + Extras + Bono) - IGSS = (4000 + 360 + 250) - 210.59 = <strong>Q4,399.41</strong>.</p>
+                        </div>
+                    </div>
+
+                    <!-- Ex 7 -->
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-3">
+                        <div class="font-semibold text-slate-800">7. Carlos laboró en una empresa desde el 1 de diciembre hasta el 31 de marzo del siguiente año (121 días) con sueldo de Q3,650.00. ¿Cuánto le corresponde de Aguinaldo proporcional?</div>
+                        <div class="space-y-2">
+                            <label class="block text-xs font-bold text-slate-700 flex items-center gap-1">
+                                <i class="fa-solid fa-pen-to-square text-verde-grisaceo"></i> Tu respuesta y procedimiento:
+                            </label>
+                            <textarea id="input-ex7" rows="2" placeholder="Escribe tu cálculo aquí..." class="w-full p-2.5 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none bg-slate-50 text-slate-800" oninput="enableSolutionBtn('ex7')"></textarea>
+                            <div id="hint-ex7" class="hidden text-xs text-amber-700 bg-amber-50 p-2 rounded border border-amber-200 flex items-center gap-1">
+                                <i class="fa-solid fa-circle-info"></i> Escribe tu respuesta en el cuadro superior para habilitar la solución.
+                            </div>
+                            <button onclick="toggleSolution('sol-ex7')" class="bg-verde-grisaceo hover:bg-teal-700 text-white text-xs px-3 py-1.5 rounded-lg transition flex items-center gap-1 font-semibold">
+                                <i class="fa-solid fa-eye"></i> <span id="btn-sol-ex7">Mostrar solución</span>
+                            </button>
+                        </div>
+                        <div id="sol-ex7" class="hidden bg-amber-50 p-3 rounded-lg text-sm border-l-4 border-amarillo-brillante space-y-1">
+                            <strong class="text-amber-900">Solución paso a paso:</strong>
+                            <p>1. Días laborados en el período de Aguinaldo (1 dic al 30 nov) = 121 días.</p>
+                            <p>2. Valor diario de aguinaldo = Q3,650.00 / 365 = Q10.00 diarios.</p>
+                            <p>3. Aguinaldo Proporcional = Q10.00 × 121 días = <strong>Q1,210.00</strong>.</p>
+                        </div>
+                    </div>
+
+                    <!-- Ex 8 -->
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-3">
+                        <div class="font-semibold text-slate-800">8. Un empleado trabaja en jornada mixta (7 horas diarias). Si en una semana labora 48 horas en total, ¿cuántas horas extraordinarias se le deben pagar en esa semana?</div>
+                        <div class="space-y-2">
+                            <label class="block text-xs font-bold text-slate-700 flex items-center gap-1">
+                                <i class="fa-solid fa-pen-to-square text-verde-grisaceo"></i> Tu respuesta y procedimiento:
+                            </label>
+                            <textarea id="input-ex8" rows="2" placeholder="Escribe tu análisis aquí..." class="w-full p-2.5 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none bg-slate-50 text-slate-800" oninput="enableSolutionBtn('ex8')"></textarea>
+                            <div id="hint-ex8" class="hidden text-xs text-amber-700 bg-amber-50 p-2 rounded border border-amber-200 flex items-center gap-1">
+                                <i class="fa-solid fa-circle-info"></i> Escribe tu respuesta en el cuadro superior para habilitar la solución.
+                            </div>
+                            <button onclick="toggleSolution('sol-ex8')" class="bg-verde-grisaceo hover:bg-teal-700 text-white text-xs px-3 py-1.5 rounded-lg transition flex items-center gap-1 font-semibold">
+                                <i class="fa-solid fa-eye"></i> <span id="btn-sol-ex8">Mostrar solución</span>
+                            </button>
+                        </div>
+                        <div id="sol-ex8" class="hidden bg-amber-50 p-3 rounded-lg text-sm border-l-4 border-amarillo-brillante space-y-1">
+                            <strong class="text-amber-900">Solución paso a paso:</strong>
+                            <p>1. Límite máximo de la Jornada Mixta semanal = 42 horas semanales.</p>
+                            <p>2. Horas laboradas reales = 48 horas.</p>
+                            <p>3. Horas extraordinarias a pagar = 48 - 42 = <strong>6 horas extras</strong>.</p>
+                        </div>
+                    </div>
+
+                    <!-- Ex 9 -->
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-3">
+                        <div class="font-semibold text-slate-800">9. Calcula la cuota patronal total del IGSS (10.67%) que debe pagar una empresa por una planilla con un sueldo ordinario total acumulado de Q50,000.00.</div>
+                        <div class="space-y-2">
+                            <label class="block text-xs font-bold text-slate-700 flex items-center gap-1">
+                                <i class="fa-solid fa-pen-to-square text-verde-grisaceo"></i> Tu respuesta y procedimiento:
+                            </label>
+                            <textarea id="input-ex9" rows="2" placeholder="Escribe tu cálculo aquí..." class="w-full p-2.5 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none bg-slate-50 text-slate-800" oninput="enableSolutionBtn('ex9')"></textarea>
+                            <div id="hint-ex9" class="hidden text-xs text-amber-700 bg-amber-50 p-2 rounded border border-amber-200 flex items-center gap-1">
+                                <i class="fa-solid fa-circle-info"></i> Escribe tu respuesta en el cuadro superior para habilitar la solución.
+                            </div>
+                            <button onclick="toggleSolution('sol-ex9')" class="bg-verde-grisaceo hover:bg-teal-700 text-white text-xs px-3 py-1.5 rounded-lg transition flex items-center gap-1 font-semibold">
+                                <i class="fa-solid fa-eye"></i> <span id="btn-sol-ex9">Mostrar solución</span>
+                            </button>
+                        </div>
+                        <div id="sol-ex9" class="hidden bg-amber-50 p-3 rounded-lg text-sm border-l-4 border-amarillo-brillante space-y-1">
+                            <strong class="text-amber-900">Solución paso a paso:</strong>
+                            <p>1. Base imponible: Q50,000.00.</p>
+                            <p>2. Porcentaje Patronal IGSS = 10.67%.</p>
+                            <p>3. Cuota Patronal = Q50,000.00 × 0.1067 = <strong>Q5,335.00</strong>.</p>
+                        </div>
+                    </div>
+
+                    <!-- Ex 10 -->
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-3">
+                        <div class="font-semibold text-slate-800">10. Un colaborador renunció formalmente a su puesto con 6 meses de antigüedad. Su salario base era Q3,200.00. ¿Tiene derecho a exigir indemnización por tiempo servido? Argumenta según ley.</div>
+                        <div class="space-y-2">
+                            <label class="block text-xs font-bold text-slate-700 flex items-center gap-1">
+                                <i class="fa-solid fa-pen-to-square text-verde-grisaceo"></i> Tu respuesta y argumento:
+                            </label>
+                            <textarea id="input-ex10" rows="2" placeholder="Argumenta tu respuesta aquí..." class="w-full p-2.5 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none bg-slate-50 text-slate-800" oninput="enableSolutionBtn('ex10')"></textarea>
+                            <div id="hint-ex10" class="hidden text-xs text-amber-700 bg-amber-50 p-2 rounded border border-amber-200 flex items-center gap-1">
+                                <i class="fa-solid fa-circle-info"></i> Escribe tu respuesta en el cuadro superior para habilitar la solución.
+                            </div>
+                            <button onclick="toggleSolution('sol-ex10')" class="bg-verde-grisaceo hover:bg-teal-700 text-white text-xs px-3 py-1.5 rounded-lg transition flex items-center gap-1 font-semibold">
+                                <i class="fa-solid fa-eye"></i> <span id="btn-sol-ex10">Mostrar solución</span>
+                            </button>
+                        </div>
+                        <div id="sol-ex10" class="hidden bg-amber-50 p-3 rounded-lg text-sm border-l-4 border-amarillo-brillante space-y-1">
+                            <strong class="text-amber-900">Solución paso a paso:</strong>
+                            <p>1. <strong>No tiene derecho a indemnización.</strong></p>
+                            <p>2. La indemnización por tiempo servido aplica únicamente en caso de <strong>despido injustificado</strong> o retiro con causa justa imputable al patrono (Art. 82 Código de Trabajo).</p>
+                            <p>3. En renuncia voluntaria únicamente se le deben pagar sus prestaciones proporcionales irrenunciables (Aguinaldo, Bono 14, Vacaciones y Salario pendiente).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AVANZADO (5 Ejercicios) -->
+                <div class="space-y-4 pt-4">
+                    <h3 class="text-lg font-bold text-pink-900 bg-pink-100 p-2 rounded-md">Ejercicios de Nivel Avanzado</h3>
+
+                    <!-- Ex 11 -->
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-3">
+                        <div class="font-semibold text-slate-800">11. Un jefe de bodega es despedido injustificadamente tras trabajar exactamente 3 años continuos. Su salario ordinario durante los últimos 6 meses fue de Q5,400.00. Calcula el monto exacto de la indemnización por tiempo servido integrando Aguinaldo y Bono 14.</div>
+                        <div class="space-y-2">
+                            <label class="block text-xs font-bold text-slate-700 flex items-center gap-1">
+                                <i class="fa-solid fa-pen-to-square text-pink-600"></i> Tu respuesta y procedimiento:
+                            </label>
+                            <textarea id="input-ex11" rows="2" placeholder="Escribe tu cálculo completo aquí..." class="w-full p-2.5 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none bg-slate-50 text-slate-800" oninput="enableSolutionBtn('ex11')"></textarea>
+                            <div id="hint-ex11" class="hidden text-xs text-amber-700 bg-amber-50 p-2 rounded border border-amber-200 flex items-center gap-1">
+                                <i class="fa-solid fa-circle-info"></i> Escribe tu respuesta en el cuadro superior para habilitar la solución.
+                            </div>
+                            <button onclick="toggleSolution('sol-ex11')" class="bg-pink-600 hover:bg-pink-800 text-white text-xs px-3 py-1.5 rounded-lg transition flex items-center gap-1 font-semibold">
+                                <i class="fa-solid fa-eye"></i> <span id="btn-sol-ex11">Mostrar solución</span>
+                            </button>
+                        </div>
+                        <div id="sol-ex11" class="hidden bg-pink-50 p-3 rounded-lg text-sm border-l-4 border-pink-500 space-y-1">
+                            <strong class="text-pink-900">Solución paso a paso:</strong>
+                            <p>1. Integración de prestaciones a la base: Salario + (Salario / 6) = Q5,400 + Q900 = Q6,300.00 base mensual integrada.</p>
+                            <p>2. Años de servicio = 3 años.</p>
+                            <p>3. Total Indemnización = 3 × Q6,300.00 = <strong>Q18,900.00</strong>.</p>
+                        </div>
+                    </div>
+
+                    <!-- Ex 12 -->
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-3">
+                        <div class="font-semibold text-slate-800">12. Roberto gana Q4,800.00 en jornada nocturna (150 hrs/mes). Durante el mes realizó 15 horas extras. Calcula: a) Valor de la hora ordinaria nocturna. b) Valor de la hora extra nocturna. c) Total de pago por horas extras.</div>
+                        <div class="space-y-2">
+                            <label class="block text-xs font-bold text-slate-700 flex items-center gap-1">
+                                <i class="fa-solid fa-pen-to-square text-pink-600"></i> Tu respuesta y procedimiento:
+                            </label>
+                            <textarea id="input-ex12" rows="2" placeholder="Responde los incisos a, b y c..." class="w-full p-2.5 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none bg-slate-50 text-slate-800" oninput="enableSolutionBtn('ex12')"></textarea>
+                            <div id="hint-ex12" class="hidden text-xs text-amber-700 bg-amber-50 p-2 rounded border border-amber-200 flex items-center gap-1">
+                                <i class="fa-solid fa-circle-info"></i> Escribe tu respuesta en el cuadro superior para habilitar la solución.
+                            </div>
+                            <button onclick="toggleSolution('sol-ex12')" class="bg-pink-600 hover:bg-pink-800 text-white text-xs px-3 py-1.5 rounded-lg transition flex items-center gap-1 font-semibold">
+                                <i class="fa-solid fa-eye"></i> <span id="btn-sol-ex12">Mostrar solución</span>
+                            </button>
+                        </div>
+                        <div id="sol-ex12" class="hidden bg-pink-50 p-3 rounded-lg text-sm border-l-4 border-pink-500 space-y-1">
+                            <strong class="text-pink-900">Solución paso a paso:</strong>
+                            <p>a) Hora ordinaria nocturna = Q4,800.00 / 150 hrs = <strong>Q32.00/hr</strong>.</p>
+                            <p>b) Hora extra (+50%) = Q32.00 × 1.5 = <strong>Q48.00/hr</strong>.</p>
+                            <p>c) Total por 15 horas extras = 15 × Q48.00 = <strong>Q720.00</strong>.</p>
+                        </div>
+                    </div>
+
+                    <!-- Ex 13 -->
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-3">
+                        <div class="font-semibold text-slate-800">13. Una empresa despide a una trabajadora que se encuentra en estado de gestación (embarazo), alegando bajo rendimiento. Analiza la legalidad de esta medida según las leyes guatemaltecas.</div>
+                        <div class="space-y-2">
+                            <label class="block text-xs font-bold text-slate-700 flex items-center gap-1">
+                                <i class="fa-solid fa-pen-to-square text-pink-600"></i> Tu análisis legal:
+                            </label>
+                            <textarea id="input-ex13" rows="2" placeholder="Escribe tu análisis jurídico..." class="w-full p-2.5 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none bg-slate-50 text-slate-800" oninput="enableSolutionBtn('ex13')"></textarea>
+                            <div id="hint-ex13" class="hidden text-xs text-amber-700 bg-amber-50 p-2 rounded border border-amber-200 flex items-center gap-1">
+                                <i class="fa-solid fa-circle-info"></i> Escribe tu respuesta en el cuadro superior para habilitar la solución.
+                            </div>
+                            <button onclick="toggleSolution('sol-ex13')" class="bg-pink-600 hover:bg-pink-800 text-white text-xs px-3 py-1.5 rounded-lg transition flex items-center gap-1 font-semibold">
+                                <i class="fa-solid fa-eye"></i> <span id="btn-sol-ex13">Mostrar solución</span>
+                            </button>
+                        </div>
+                        <div id="sol-ex13" class="hidden bg-pink-50 p-3 rounded-lg text-sm border-l-4 border-pink-500 space-y-1">
+                            <strong class="text-pink-900">Solución paso a paso:</strong>
+                            <p>1. <strong>El despido es ilegal y nulo.</strong></p>
+                            <p>2. Según el Art. 151 del Código de Trabajo, la mujer embarazada goza de <strong>inamovilidad laboral</strong> durante la gestación y el período de lactancia.</p>
+                            <p>3. Para despedir a una trabajadora en estado de gestación, el patrono debe tramitar previamente un incidente de despido ante un Juez de Trabajo demostrando causa justa. Si no lo hace, la trabajadora debe ser reinstalada inmediatamente con pago de salarios caídos.</p>
+                        </div>
+                    </div>
+
+                    <!-- Ex 14 -->
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-3">
+                        <div class="font-semibold text-slate-800">14. Un patrono propone a sus empleados firmar un documento donde renuncian al Bono 14 a cambio de darles un bono de productividad variable sujeto a metas. ¿Qué validez jurídica tiene dicho contrato firmando por ambas partes?</div>
+                        <div class="space-y-2">
+                            <label class="block text-xs font-bold text-slate-700 flex items-center gap-1">
+                                <i class="fa-solid fa-pen-to-square text-pink-600"></i> Tu análisis legal:
+                            </label>
+                            <textarea id="input-ex14" rows="2" placeholder="Escribe tu dictamen aquí..." class="w-full p-2.5 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none bg-slate-50 text-slate-800" oninput="enableSolutionBtn('ex14')"></textarea>
+                            <div id="hint-ex14" class="hidden text-xs text-amber-700 bg-amber-50 p-2 rounded border border-amber-200 flex items-center gap-1">
+                                <i class="fa-solid fa-circle-info"></i> Escribe tu respuesta en el cuadro superior para habilitar la solución.
+                            </div>
+                            <button onclick="toggleSolution('sol-ex14')" class="bg-pink-600 hover:bg-pink-800 text-white text-xs px-3 py-1.5 rounded-lg transition flex items-center gap-1 font-semibold">
+                                <i class="fa-solid fa-eye"></i> <span id="btn-sol-ex14">Mostrar solución</span>
+                            </button>
+                        </div>
+                        <div id="sol-ex14" class="hidden bg-pink-50 p-3 rounded-lg text-sm border-l-4 border-pink-500 space-y-1">
+                            <strong class="text-pink-900">Solución paso a paso:</strong>
+                            <p>1. <strong>Es nulo de pleno derecho (sin validez legal).</strong></p>
+                            <p>2. Fundamento: Art. 106 de la Constitución Política de Guatemala y Código de Trabajo. Los derechos laborales son irrenunciables.</p>
+                            <p>3. Aunque los trabajadores hayan firmado de forma voluntaria, la ley considers que esa cláusula no existe y el patrono sigue estando obligado a pagar el 100% del Bono 14 en la fecha correspondiente.</p>
+                        </div>
+                    </div>
+
+                    <!-- Ex 15 -->
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-3">
+                        <div class="font-semibold text-slate-800">15. Calcula el finiquito de prestaciones irrenunciables para un empleado que laboró 180 días del período de Bono 14 y 180 días del período de Aguinaldo, con un sueldo ordinario mensual de Q3,650.00 (sin faltas ni vacaciones pendientes).</div>
+                        <div class="space-y-2">
+                            <label class="block text-xs font-bold text-slate-700 flex items-center gap-1">
+                                <i class="fa-solid fa-pen-to-square text-pink-600"></i> Tu respuesta y procedimiento:
+                            </label>
+                            <textarea id="input-ex15" rows="2" placeholder="Escribe el finiquito calculado..." class="w-full p-2.5 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none bg-slate-50 text-slate-800" oninput="enableSolutionBtn('ex15')"></textarea>
+                            <div id="hint-ex15" class="hidden text-xs text-amber-700 bg-amber-50 p-2 rounded border border-amber-200 flex items-center gap-1">
+                                <i class="fa-solid fa-circle-info"></i> Escribe tu respuesta en el cuadro superior para habilitar la solución.
+                            </div>
+                            <button onclick="toggleSolution('sol-ex15')" class="bg-pink-600 hover:bg-pink-800 text-white text-xs px-3 py-1.5 rounded-lg transition flex items-center gap-1 font-semibold">
+                                <i class="fa-solid fa-eye"></i> <span id="btn-sol-ex15">Mostrar solución</span>
+                            </button>
+                        </div>
+                        <div id="sol-ex15" class="hidden bg-pink-50 p-3 rounded-lg text-sm border-l-4 border-pink-500 space-y-1">
+                            <strong class="text-pink-900">Solución paso a paso:</strong>
+                            <p>1. Valor diario de prestación = Q3,650 / 365 = Q10.00 al día.</p>
+                            <p>2. Proporcional Bono 14 (180 días) = 180 × Q10.00 = Q1,800.00.</p>
+                            <p>3. Proporcional Aguinaldo (180 días) = 180 × Q10.00 = Q1,800.00.</p>
+                            <p>4. Total de Prestaciones Irrenunciables = Q1,800.00 + Q1,800.00 = <strong>Q3,600.00</strong>.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 4: REFLEXIÓN CRÍTICA -->
+            <section id="sec-reflexion" class="tab-content hidden space-y-6">
+                <div class="border-l-4 border-amarillo-brillante pl-4 bg-white p-4 rounded-r-lg shadow-sm">
+                    <h2 class="text-2xl font-bold text-azul-principal flex items-center gap-2">
+                        <i class="fa-solid fa-brain text-amarillo-brillante"></i>
+                        Preguntas de Reflexión Crítica y Análisis
+                    </h2>
+                    <p class="text-slate-600 text-sm mt-1">
+                        Cuestionamientos abiertos diseñados para el análisis conceptual profundo, discusión en clase y pensamiento lógico-jurídico.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:border-azul-principal transition space-y-3">
+                        <div class="flex items-center gap-2 text-azul-principal font-bold text-lg">
+                            <span class="bg-blue-100 text-azul-principal rounded-full w-8 h-8 flex items-center justify-center font-extrabold text-sm">1</span>
+                            El Principio de Irrenunciabilidad vs. Necesidad Económica
+                        </div>
+                        <p class="text-sm text-slate-700 leading-relaxed">
+                            Si un ciudadano desempleado decide aceptar voluntariamente firmar un contrato donde pacta trabajar 10 horas diarias en jornada diurna por un sueldo menor al mínimo legal porque necesita ingresos urgentes, ¿por qué la legislación guatemalteca invalida ese acuerdo pactado voluntariamente? Discute el concepto de la tutoría estatal y el bienestar colectivo sobre el acuerdo individual.
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:border-azul-principal transition space-y-3">
+                        <div class="flex items-center gap-2 text-azul-principal font-bold text-lg">
+                            <span class="bg-blue-100 text-azul-principal rounded-full w-8 h-8 flex items-center justify-center font-extrabold text-sm">2</span>
+                            Digitalización, Teletrabajo y Desconexión Laboral
+                        </div>
+                        <p class="text-sm text-slate-700 leading-relaxed">
+                            En la actualidad, muchos colaboradores responden mensajes de trabajo por WhatsApp o correo electrónico fuera de su horario laboral ordinario. Con base en los límites legales de las jornadas de trabajo en Guatemala, ¿deberían estas interacciones digitales considerarse como horas extraordinarias? ¿Cómo afecta el no respetar la jornada de trabajo a la salud laboral?
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:border-azul-principal transition space-y-3">
+                        <div class="flex items-center gap-2 text-azul-principal font-bold text-lg">
+                            <span class="bg-blue-100 text-azul-principal rounded-full w-8 h-8 flex items-center justify-center font-extrabold text-sm">3</span>
+                            Informalidad Laboral en Guatemala
+                        </div>
+                        <p class="text-sm text-slate-700 leading-relaxed">
+                            Se estima que más del 65% de la población económicamente activa en Guatemala se desempeña en el sector informal (sin contrato, sin IGSS y sin prestaciones). ¿Cuáles son las consecuencias socioeconómicas a largo plazo para el país cuando la mayoría de trabajadores no goza de los mínimos de protección legal del Código de Trabajo?
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:border-azul-principal transition space-y-3">
+                        <div class="flex items-center gap-2 text-azul-principal font-bold text-lg">
+                            <span class="bg-blue-100 text-azul-principal rounded-full w-8 h-8 flex items-center justify-center font-extrabold text-sm">4</span>
+                            Equidad de Género y Protección a la Maternidad
+                        </div>
+                        <p class="text-sm text-slate-700 leading-relaxed">
+                            Analiza el equilibrio entre la protección reforzada a la maternidad (fuero de inamovilidad y descansos pre/post natales) y las prácticas de contratación en el sector privado. ¿Qué medidas de fiscalización deberían reforzarse para evitar la discriminación de género en los procesos de selección de personal?
+                        </p>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- SECCIÓN 5: EVALUACIÓN FORMATIVA -->
+            <section id="sec-evaluacion" class="tab-content hidden space-y-6">
+                <div class="flex justify-between items-center border-b pb-3">
+                    <h2 class="text-2xl font-bold text-azul-principal">
+                        <i class="fa-solid fa-clipboard-check text-verde-oliva mr-2"></i>
+                        Evaluación Formativa Interactiva
+                    </h2>
+                    <span class="text-xs bg-azul-principal text-white px-3 py-1 rounded-full font-semibold">Comprueba tus conocimientos</span>
+                </div>
+
+                <p class="text-sm text-slate-600">
+                    Responde los siguientes cuestionamientos de refuerzo en los campos habilitados y verifica tus resultados.
+                </p>
+
+                <!-- Reactivo Formativo 1 -->
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-3">
+                    <div class="font-bold text-slate-800 flex items-center gap-2">
+                        <span class="bg-verde-oliva text-white text-xs px-2 py-1 rounded">Pregunta 1</span>
+                        Comprobación Conceptual de Jornadas
+                    </div>
+                    <p class="text-sm text-slate-700">
+                        Un empleado trabaja de 14:00 a 21:00 horas de lunes a viernes (7 horas diarias). ¿A qué tipo de jornada corresponde este horario y cuántas horas semanales acumula?
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
+                        <div class="p-2 border rounded hover:bg-slate-50 cursor-pointer">A) Jornada Diurna - 35 horas semanales.</div>
+                        <div class="p-2 border rounded hover:bg-slate-50 cursor-pointer">B) Jornada Nocturna - 42 horas semanales.</div>
+                        <div class="p-2 border rounded hover:bg-slate-50 cursor-pointer font-bold text-azul-principal bg-blue-50">C) Jornada Mixta - 35 horas semanales (Dentro del límite legal de 42h).</div>
+                        <div class="p-2 border rounded hover:bg-slate-50 cursor-pointer">D) Jornada Extraordinaria - 48 horas semanales.</div>
+                    </div>
+                    <div class="space-y-2 pt-2">
+                        <label class="block text-xs font-bold text-slate-700 flex items-center gap-1">
+                            <i class="fa-solid fa-pen-to-square text-verde-oliva"></i> Tu justificación de la respuesta:
+                        </label>
+                        <textarea id="input-ev1" rows="2" placeholder="Justifica tu elección aquí..." class="w-full p-2.5 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none bg-slate-50 text-slate-800" oninput="enableSolutionBtn('ev1')"></textarea>
+                        <div id="hint-ev1" class="hidden text-xs text-amber-700 bg-amber-50 p-2 rounded border border-amber-200 flex items-center gap-1">
+                            <i class="fa-solid fa-circle-info"></i> Justifica tu respuesta en el cuadro superior para habilitar la solución.
+                        </div>
+                        <button onclick="toggleSolution('sol-ev1')" class="bg-verde-grisaceo hover:bg-teal-700 text-white text-xs px-3 py-1.5 rounded-lg transition font-semibold">
+                            <span id="btn-sol-ev1">Mostrar solución detallada</span>
+                        </button>
+                    </div>
+                    <div id="sol-ev1" class="hidden bg-slate-100 p-3 rounded-lg text-xs font-mono text-slate-800">
+                        <strong>Respuesta correcta: C</strong><br>
+                        Explicación: El horario abarca parte del día (14:00 a 18:00 = 4 hrs diurnas) y parte de la noche (18:00 a 21:00 = 3 hrs nocturnas). Dado que las horas nocturnas son menores a 4, califica como <strong>Jornada Mixta</strong> (límite 7h/día y 42h/semana). Multiplicado por 5 días = 35 hrs semanales.
+                    </div>
+                </div>
+
+                <!-- Reactivo Formativo 2 -->
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-3">
+                    <div class="font-bold text-slate-800 flex items-center gap-2">
+                        <span class="bg-verde-oliva text-white text-xs px-2 py-1 rounded">Pregunta 2</span>
+                        Problema de Caso Práctico Integrado
+                    </div>
+                    <p class="text-sm text-slate-700">
+                        El señor Carlos Méndez devenga un sueldo base ordinario de <strong>Q5,000.00</strong>. En el presente mes laboró 10 horas extras diurnas (200 horas base al mes). Además recibe su bonificación incentivo legal de Q250.00.
+                        <br><br>
+                        <strong>Calcula:</strong><br>
+                        1. Monto a recibir por Horas Extras.<br>
+                        2. Retención de IGSS laboral.<br>
+                        3. Sueldo Líquido Final a recibir en su cuenta bancaria.
+                    </p>
+
+                    <div class="space-y-2 pt-2">
+                        <label class="block text-xs font-bold text-slate-700 flex items-center gap-1">
+                            <i class="fa-solid fa-pen-to-square text-verde-oliva"></i> Tu procedimiento y cálculos:
+                        </label>
+                        <textarea id="input-ev2" rows="3" placeholder="Escribe tus respuestas para los incisos 1, 2 y 3..." class="w-full p-2.5 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none bg-slate-50 text-slate-800" oninput="enableSolutionBtn('ev2')"></textarea>
+                        <div id="hint-ev2" class="hidden text-xs text-amber-700 bg-amber-50 p-2 rounded border border-amber-200 flex items-center gap-1">
+                            <i class="fa-solid fa-circle-info"></i> Escribe tus cálculos en el cuadro superior para habilitar la solución.
+                        </div>
+                        <button onclick="toggleSolution('sol-ev2')" class="bg-verde-grisaceo hover:bg-teal-700 text-white text-xs px-3 py-1.5 rounded-lg transition font-semibold">
+                            <span id="btn-sol-ev2">Mostrar solución detallada</span>
+                        </button>
+                    </div>
+                    
+                    <div id="sol-ev2" class="hidden bg-slate-100 p-3 rounded-lg text-xs font-mono space-y-1 text-slate-800">
+                        <strong>Resolución Paso a Paso:</strong><br>
+                        • Paso 1: Valor hora ordinaria = Q5,000.00 / 200 hrs = Q25.00/hr.<br>
+                        • Paso 2: Valor hora extra (+50%) = Q25.00 × 1.5 = Q37.50/hr.<br>
+                        • Paso 3: Total Horas Extras = 10 hrs × Q37.50 = <strong>Q375.00</strong>.<br>
+                        • Paso 4: Base para IGSS = Salario Ordinario (Q5,000) + Extraordinario (Q375) = Q5,375.00.<br>
+                        • Paso 5: Descuento IGSS (4.83%) = Q5,375.00 × 0.0483 = <strong>Q259.61</strong>.<br>
+                        • Paso 6: Sueldo Líquido = (Sueldo Ordinario + Extras + Bonificación Q250) - IGSS<br>
+                        • Sueldo Líquido = (Q5,000.00 + Q375.00 + Q250.00) - Q259.61 = <strong>Q5,365.39</strong>.
+                    </div>
+                </div>
+
+                <!-- Reactivo Formativo 3 -->
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-3">
+                    <div class="font-bold text-slate-800 flex items-center gap-2">
+                        <span class="bg-verde-oliva text-white text-xs px-2 py-1 rounded">Pregunta 3</span>
+                        Verdadero o Falso - Normativa Laboral
+                    </div>
+                    <div class="text-sm text-slate-700 space-y-2">
+                        <p>a) El patrono puede compensar en dinero el período de vacaciones no disfrutadas mientras la relación laboral siga vigente. <strong>(V / F)</strong></p>
+                        <p>b) El cálculo de la indemnización incluye la parte proporcional de las prestaciones de Aguinaldo y Bono 14. <strong>(V / F)</strong></p>
+                    </div>
+
+                    <div class="space-y-2 pt-2">
+                        <label class="block text-xs font-bold text-slate-700 flex items-center gap-1">
+                            <i class="fa-solid fa-pen-to-square text-verde-oliva"></i> Tus respuestas y justificación:
+                        </label>
+                        <textarea id="input-ev3" rows="2" placeholder="Escribe a) V o F y b) V o F con su justificación..." class="w-full p-2.5 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none bg-slate-50 text-slate-800" oninput="enableSolutionBtn('ev3')"></textarea>
+                        <div id="hint-ev3" class="hidden text-xs text-amber-700 bg-amber-50 p-2 rounded border border-amber-200 flex items-center gap-1">
+                            <i class="fa-solid fa-circle-info"></i> Escribe tus respuestas en el cuadro superior para habilitar la solución.
+                        </div>
+                        <button onclick="toggleSolution('sol-ev3')" class="bg-verde-grisaceo hover:bg-teal-700 text-white text-xs px-3 py-1.5 rounded-lg transition font-semibold">
+                            <span id="btn-sol-ev3">Mostrar solución detallada</span>
+                        </button>
+                    </div>
+                    
+                    <div id="sol-ev3" class="hidden bg-slate-100 p-3 rounded-lg text-xs font-mono space-y-1 text-slate-800">
+                        <strong>Respuestas:</strong><br>
+                        a) <strong>FALSO:</strong> Las vacaciones no son compensables en dinero mientras la relación laboral esté vigente (Art. 133 Código de Trabajo). Deben disfrutarse efectivamente.<br>
+                        b) <strong>VERDADERO:</strong> La jurisprudencia y normativa de Guatemala indican que el salario base para la indemnización integra las proporciones anuales de Aguinaldo y Bono 14.
+                    </div>
+                </div>
+
+            </section>
+        </main>
+
+        <!-- FOOTER / BARRA DE ESTADO DE LA PIZARRA -->
+        <footer class="bg-slate-800 text-slate-300 p-3 text-xs flex flex-wrap justify-between items-center border-t border-slate-700">
+            <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>Colegio Montano • Material Didáctico Digital para Canvas</span>
+            </div>
+            <div>
+                <span>Diseño Instruccional Educativo • Formato Pizarra Interactiva</span>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- SCRIPT DE NAVEGACIÓN E INTERACCIÓN -->
+    <script>
+        function switchTab(tabId) {
+            // Ocultar todas las secciones
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.add('hidden'));
+
+            // Desactivar todos los botones de pestañas
+            const tabs = document.querySelectorAll('.nav-tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            // Mostrar sección seleccionada
+            const targetContent = document.getElementById('sec-' + tabId);
+            if (targetContent) {
+                targetContent.classList.remove('hidden');
+            }
+
+            // Activar pestaña seleccionada
+            const targetTab = document.getElementById('tab-' + tabId);
+            if (targetTab) {
+                targetTab.classList.add('active');
+            }
+        }
+
+        function enableSolutionBtn(key) {
+            const input = document.getElementById('input-' + key);
+            const hint = document.getElementById('hint-' + key);
+            if (input && input.value.trim().length > 0) {
+                if (hint) hint.classList.add('hidden');
+            }
+        }
+
+        function toggleSolution(solId) {
+            const solContainer = document.getElementById(solId);
+            const btnSpan = document.getElementById('btn-' + solId);
+            const key = solId.replace('sol-', '');
+            const inputElem = document.getElementById('input-' + key);
+            const hintElem = document.getElementById('hint-' + key);
+
+            // Validar si el estudiante ingresó una respuesta antes de mostrar la solución
+            if (solContainer && solContainer.classList.contains('hidden') && inputElem && inputElem.value.trim() === '') {
+                if (hintElem) {
+                    hintElem.classList.remove('hidden');
+                }
+                return; // Bloquea el despliegue hasta que escriba algo
+            }
+
+            if (solContainer) {
+                if (solContainer.classList.contains('hidden')) {
+                    solContainer.classList.remove('hidden');
+                    if (btnSpan) btnSpan.textContent = 'Ocultar solución';
+                } else {
+                    solContainer.classList.add('hidden');
+                    if (btnSpan) btnSpan.textContent = 'Mostrar solución';
+                }
+            }
+        }
+
+        function toggleFullscreen() {
+            const container = document.getElementById('whiteboardContainer');
+            const icon = document.getElementById('fullscreenIcon');
+            const text = document.getElementById('fullscreenText');
+
+            if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                if (container.requestFullscreen) {
+                    container.requestFullscreen();
+                } else if (container.webkitRequestFullscreen) {
+                    container.webkitRequestFullscreen();
+                }
+                if (icon) icon.className = 'fa-solid fa-compress';
+                if (text) text.textContent = 'Salir de pantalla completa';
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                }
+                if (icon) icon.className = 'fa-solid fa-expand';
+                if (text) text.textContent = 'Pantalla completa';
+            }
+        }
+
+        // Detectar cambios en pantalla completa (por ejemplo si presiona ESC)
+        document.addEventListener('fullscreenchange', updateFullscreenBtn);
+        document.addEventListener('webkitfullscreenchange', updateFullscreenBtn);
+
+        function updateFullscreenBtn() {
+            const icon = document.getElementById('fullscreenIcon');
+            const text = document.getElementById('fullscreenText');
+            if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                if (icon) icon.className = 'fa-solid fa-expand';
+                if (text) text.textContent = 'Pantalla completa';
+            }
+        }
+    </script>
+</body>
+</html>
